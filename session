@@ -1,17 +1,40 @@
 <?php
 session_start();
+if($_GET["destroy"] == true){
+    session_destroy();   
+    header('Location: renderStudentsInfoHTML.php');
+    exit;
+}
 
 $name = $_GET["name"];
-$i = $_SESSION["i"]++;
+$age = $_GET["age"];
+$submited = $_GET["submited"];
 
- $_SESSION["names"][$i] = $name;
-
- var_dump($_SESSION["names"]);
- 
+if (isset($submited, $name, $age)) {   
+    $i = $_SESSION["i"]++;
+    $_SESSION["nameAgeStudent"][$name] = $age;          
+}
 ?>
 
-<form method="get" action="sesion.php">
-    <input type="text" name="name"><br>   
-    <input type="submit" name="submited" value="Filter!"> 
+<?php if (isset($name, $age)): ?> 
     
-</form>
+<table border = '1'>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($_SESSION["nameAgeStudent"] as $k => $v ): ?>
+        <tr>            
+            <td><?= $k ?></td>
+            <td><?= $v ?></td>                        
+        </tr>
+        <?php endforeach; ?>
+    </tbody>    
+</table>
+
+<?php endif; ?>
+
+<?php include 'renderStudentsInfoHTML.php'; ?>
