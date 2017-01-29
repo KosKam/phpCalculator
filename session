@@ -1,0 +1,17 @@
+<?php
+session_start();
+
+$name = $_GET["name"];
+$i = $_SESSION["i"]++;
+
+ $_SESSION["names"][$i] = $name;
+
+ var_dump($_SESSION["names"]);
+ 
+?>
+
+<form method="get" action="sesion.php">
+    <input type="text" name="name"><br>   
+    <input type="submit" name="submited" value="Filter!"> 
+    
+</form>
