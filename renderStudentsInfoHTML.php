@@ -8,19 +8,15 @@
     </div>
     <div>
         Names: 
-        <input type="text" name="names">        
+        <input type="text" name="name">        
     </div>
     <div>
         Ages: 
-        <input type="text" name="ages">        
+        <input type="text" name="age">        
     </div>
     <div>     
         <input type="submit" name="submited" value="Filter!">        
     </div>   
     
 </form>
-
-
-
-
 
