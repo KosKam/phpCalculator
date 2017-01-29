@@ -1,31 +1,21 @@
 <?php
 session_start();
+include 'renderStudentsInfoHTML.php'; 
+
+$separator = $_GET["separator"];
 $name = $_GET["name"];
 $age = $_GET["age"];
 $submited = $_GET["submited"];
 
-$nameStudent = array();
-$ageStudent = array();
-$i = 0;
-
 if (isset($submited, $name, $age)) {
     
-    $nameStudent[$i] = $name;
-    $ageStudent[$i] = $age;
-    $i++;       
+    $arrayOfNames = explode($separator, $name);
+    $arrayOfAges = explode($separator, $age);                
 }
-
-$_SESSION["nameStudent"] = $nameStudent;
-$_SESSION["ageStudent"] = $ageStudent;
-$_SESSION["i"] = 0;
-$_SESSION["i"]++;
-
 ?>
-<?php    var_dump($_SESSION["i"]); ?>
 
-<?php if (isset($names, $ages)): ?> 
+<?php if (isset($name, $age)): ?> 
 
-    
     <table border = 1>
     <thead>
         <tr>
@@ -34,15 +24,14 @@ $_SESSION["i"]++;
         </tr>
     </thead>
     <tbody>
-        <?php for($ii = 0; $ii < count($nameStudent); $ii++): ?>
+        <?php for($ii = 0; $ii < count($arrayOfNames); $ii++): ?>
         <tr>
-            <td><?= $nameStudent[$ii] ?></td>
-            <td><?= $ageStudent[$ii] ?></td>
+            <td><?= $arrayOfNames[$ii] ?></td>
+            <td><?= $arrayOfAges[$ii] ?></td>
         </tr>
         <?php endfor; ?>
     </tbody>    
-</table>;
+</table>
 
 <?php endif; ?>
 
- <?php include 'renderStudentsInfoHTML.php'; ?>
