@@ -1,22 +1,24 @@
 <?php
 session_start();
-include 'renderStudentsInfoHTML.php'; 
+if($_GET["destroy"] == true){
+    session_destroy();   
+    header('Location: renderStudentsInfoHTML.php');
+    exit;
+}
 
-$separator = $_GET["separator"];
 $name = $_GET["name"];
 $age = $_GET["age"];
 $submited = $_GET["submited"];
 
-if (isset($submited, $name, $age)) {
-    
-    $arrayOfNames = explode($separator, $name);
-    $arrayOfAges = explode($separator, $age);                
+if (isset($submited, $name, $age)) {   
+    $i = $_SESSION["i"]++;
+    $_SESSION["nameAgeStudent"][$name] = $age;          
 }
 ?>
 
 <?php if (isset($name, $age)): ?> 
-
-    <table border = 1>
+    
+<table border = '1'>
     <thead>
         <tr>
             <th>Name</th>
@@ -24,14 +26,15 @@ if (isset($submited, $name, $age)) {
         </tr>
     </thead>
     <tbody>
-        <?php for($ii = 0; $ii < count($arrayOfNames); $ii++): ?>
-        <tr>
-            <td><?= $arrayOfNames[$ii] ?></td>
-            <td><?= $arrayOfAges[$ii] ?></td>
+        <?php foreach ($_SESSION["nameAgeStudent"] as $k => $v ): ?>
+        <tr>            
+            <td><?= $k ?></td>
+            <td><?= $v ?></td>                        
         </tr>
-        <?php endfor; ?>
+        <?php endforeach; ?>
     </tbody>    
 </table>
 
 <?php endif; ?>
 
+<?php include 'renderStudentsInfoHTML.php'; ?>
