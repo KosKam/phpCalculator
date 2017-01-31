@@ -16,7 +16,9 @@
     </div>
     <div>     
         <input type="submit" name="submited" value="Filter!">        
-    </div>   
+    </div> 
+    <div>     
+        <input type="submit" name="destroy" value="Destroy Table!">        
+    </div>
     
 </form>
-
